@@ -12,7 +12,7 @@ def ping(imac: IMacModel):
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
     try:
-        ssh_client.connect(imac.ip, username=imac.mac_user, timeout=10)
+        ssh_client.connect(imac.ip, username=imac.mac_user, timeout=20)
         ssh_client.close()
 
         imac.alive = True
