@@ -13,7 +13,7 @@ class IMacModel(models.Model):
 
     serial_number = models.CharField(max_length=255)
 
-    storage_capacity = models.IntegerField()
+    storage_capacity = models.FloatField()
     memory = models.IntegerField()
     cpu_cores = models.IntegerField()
 
