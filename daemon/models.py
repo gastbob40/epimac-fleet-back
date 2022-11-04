@@ -13,3 +13,6 @@ class IMacModel(models.Model):
     class Meta:
         verbose_name = "IMac"
         verbose_name_plural = "IMacs"
+
+    def __str__(self):
+        return self.label
