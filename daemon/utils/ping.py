@@ -3,6 +3,7 @@ from django.utils import timezone
 from rich import print
 
 from daemon.models import IMacModel
+from daemon.utils.ssh import SshClient
 
 
 def ping_mac(imac: IMacModel):
@@ -10,8 +11,9 @@ def ping_mac(imac: IMacModel):
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
     try:
-        ssh_client.connect(imac.ip, username=imac.mac_user, timeout=20)
-        ssh_client.close()
+        client = SshClient(ssh_client, imac.ip, imac.mac_user)
+
+        client.close()
 
         imac.status = IMacModel.MacStatus.AVAILABLE
         imac.last_seen = timezone.now()
