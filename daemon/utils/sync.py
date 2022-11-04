@@ -6,7 +6,11 @@ from daemon.models import IMacModel
 from daemon.utils.ssh import SshClient
 
 
-def sync(imac: IMacModel):
+def sync_mac(imac: IMacModel):
+    """
+    Perform a sync of the attribute of the iMac
+    """
+
     ssh_client = paramiko.SSHClient()
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
@@ -28,17 +32,3 @@ def sync(imac: IMacModel):
     client.close()
 
     imac.save()
-
-
-def async_sync():
-    imacs = IMacModel.objects.all()
-
-    threads = []
-
-    for imac in imacs:
-        th = threading.Thread(target=sync, args=(imac,))
-        th.start()
-        threads.append(th)
-
-    for th in threads:
-        th.join()

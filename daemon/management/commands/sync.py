@@ -1,6 +1,8 @@
 from django.core.management.base import BaseCommand
 
-from daemon.utils.sync import async_sync
+from daemon.models import IMacModel
+from daemon.utils.sync import sync_mac
+from daemon.utils.thread import run_mac_action_async
 
 
 class Command(BaseCommand):
@@ -9,4 +11,5 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print("Syncing iMacs state...")
 
-        async_sync()
+        imacs = IMacModel.objects.all()
+        run_mac_action_async(imacs, sync_mac)
