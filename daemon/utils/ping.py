@@ -1,5 +1,3 @@
-import threading
-
 import paramiko
 from django.utils import timezone
 from rich import print
@@ -7,7 +5,7 @@ from rich import print
 from daemon.models import IMacModel
 
 
-def ping(imac: IMacModel):
+def ping_mac(imac: IMacModel):
     ssh_client = paramiko.SSHClient()
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
@@ -24,17 +22,3 @@ def ping(imac: IMacModel):
         print(f"[bold red]{imac.label} is dead")
 
     imac.save()
-
-
-def async_ping():
-    imacs = IMacModel.objects.all()
-
-    threads = []
-
-    for imac in imacs:
-        th = threading.Thread(target=ping, args=(imac,))
-        th.start()
-        threads.append(th)
-
-    for th in threads:
-        th.join()
