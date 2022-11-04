@@ -7,5 +7,5 @@ from daemon.models import IMacModel
 
 @admin.register(IMacModel)
 class IMacModelAdmin(admin.ModelAdmin):
-    list_display = ('label', 'mac_user', 'ip', 'alive', 'last_seen',)
+    list_display = ('label', 'mac_user', 'ip', 'last_seen',)
     # Override the name on the admin page

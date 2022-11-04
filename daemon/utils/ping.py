@@ -15,12 +15,12 @@ def ping(imac: IMacModel):
         ssh_client.connect(imac.ip, username=imac.mac_user, timeout=20)
         ssh_client.close()
 
-        imac.alive = True
+        imac.status = IMacModel.MacStatus.AVAILABLE
         imac.last_seen = timezone.now()
 
         print(f"[bold green]{imac.label} is alive")
     except:
-        imac.alive = False
+        imac.status = IMacModel.MacStatus.UNAVAILABLE
         print(f"[bold red]{imac.label} is dead")
 
     imac.save()

@@ -4,11 +4,34 @@ from django.db import models
 # Create your models here.
 
 class IMacModel(models.Model):
+    # Mac specification
     label = models.CharField(max_length=255)
     ip = models.CharField(max_length=255)
+
+    macos_version = models.CharField(max_length=255)
+    macos_build_version = models.CharField(max_length=255)
+
+    serial_number = models.CharField(max_length=255)
+
+    storage_capacity = models.IntegerField()
+    memory = models.IntegerField()
+    cpu_cores = models.IntegerField()
+
+    # Internal Data
+
     mac_user = models.CharField(max_length=255)
-    alive = models.BooleanField(default=False)
     last_seen = models.DateTimeField(null=True, blank=True)
+
+    class MacStatus(models.TextChoices):
+        UNAVAILABLE = "Unavailable"
+        AVAILABLE = "Available"
+        IN_USE = "In Use"
+
+    status = models.CharField(
+        max_length=255,
+        choices=MacStatus.choices,
+        default=MacStatus.UNAVAILABLE,
+    )
 
     class Meta:
         verbose_name = "IMac"
