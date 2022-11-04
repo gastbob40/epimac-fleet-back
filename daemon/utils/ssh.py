@@ -9,7 +9,7 @@ class SshClient:
     def run_command_and_get_stdout(self, command: str) -> str:
         _, stdout, _ = self.ssh_client.exec_command(command)
         stdout.channel.recv_exit_status()
-        return '\n'.join(stdout.readlines())
+        return stdout.read().decode("utf-8").strip()
 
     def close(self):
         self.ssh_client.close()
