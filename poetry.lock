@@ -134,6 +134,17 @@ docs = ["sphinx (>=1.6.5)", "sphinx-rtd-theme"]
 tests = ["pytest (>=3.2.1,!=3.3.0)", "hypothesis (>=3.27.0)"]
 
 [[package]]
+name = "python-dotenv"
+version = "0.21.0"
+description = "Read key-value pairs from a .env file and set them as environment variables"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+cli = ["click (>=5.0)"]
+
+[[package]]
 name = "rich"
 version = "12.6.0"
 description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
@@ -175,7 +186,7 @@ python-versions = ">=2"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "9f739c823e97c2eca55cc4abdfbea36fc26ef5a604fb4d5bd1613b59f68b309e"
+content-hash = "89520d5ef079ee16596180e6c1f753f2f56ef713cce6c6ce610f54aae4a9deb0"
 
 [metadata.files]
 asgiref = [
@@ -259,6 +270,7 @@ pycparser = [
 ]
 pygments = []
 pynacl = []
+python-dotenv = []
 rich = []
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},

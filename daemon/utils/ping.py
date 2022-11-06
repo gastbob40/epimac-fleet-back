@@ -13,10 +13,14 @@ def ping_mac(imac: IMacModel):
     try:
         client = SshClient(ssh_client, imac.ip, imac.mac_user)
 
-        client.close()
-
         imac.status = IMacModel.MacStatus.AVAILABLE
         imac.last_seen = timezone.now()
+
+        stdout = client.run_command_and_get_stdout("who | grep console")
+        if stdout:
+            imac.status = IMacModel.MacStatus.IN_USE
+
+        client.close()
 
         print(f"[bold green]{imac.label} is alive")
     except:
