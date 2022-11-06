@@ -10,6 +10,7 @@ Django = "^4.1.2"
 paramiko = "^2.11.0"
 rich = "^12.6.0"
 python-dotenv = "^0.21.0"
+discord-webhook = "^0.17.0"
 
 [tool.poetry.dev-dependencies]
 

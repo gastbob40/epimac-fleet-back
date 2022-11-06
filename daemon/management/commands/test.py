@@ -12,4 +12,6 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         print('Testings...')
 
-        send_imac_status_notification(None)
+        imac = IMacModel.objects.all()[0]
+        imac.status = IMacModel.MacStatus.IN_USE
+        send_imac_status_notification(imac)
