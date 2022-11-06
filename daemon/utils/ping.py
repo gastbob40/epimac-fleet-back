@@ -3,12 +3,15 @@ from django.utils import timezone
 from rich import print
 
 from daemon.models import IMacModel
+from daemon.utils.notification import send_imac_status_notification
 from daemon.utils.ssh import SshClient
 
 
 def ping_mac(imac: IMacModel):
     ssh_client = paramiko.SSHClient()
     ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+    current_status = imac.status
 
     try:
         client = SshClient(ssh_client, imac.ip, imac.mac_user)
@@ -28,3 +31,6 @@ def ping_mac(imac: IMacModel):
         print(f"[bold red]{imac.label} is dead")
 
     imac.save()
+
+    if current_status != imac.status:
+        send_imac_status_notification(imac)

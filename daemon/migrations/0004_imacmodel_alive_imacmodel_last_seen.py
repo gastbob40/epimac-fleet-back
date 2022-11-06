@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("daemon", "0003_alter_imacmodel_options_imacmodel_mac_user"),
     ]

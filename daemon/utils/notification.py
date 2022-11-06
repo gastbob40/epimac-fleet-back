@@ -26,7 +26,7 @@ def send_imac_status_notification(imac: IMacModel):
     webhook = DiscordWebhook(
         url=os.environ.get('DISCORD_MAC_STATUS_WEBHOOK_URL'),
         username="EpiMac Bot",
-        avatar_url="https://cdn.discordapp.com/icons/501407992818958377/a_8d192eb9c2143f2914124345b28bbc1f.webp?size=1024",)
+        avatar_url="https://cdn.discordapp.com/icons/501407992818958377/a_8d192eb9c2143f2914124345b28bbc1f.webp?size=1024", )
 
     webhook.add_embed(embed)
     webhook.execute()

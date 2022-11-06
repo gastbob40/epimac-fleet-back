@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("daemon", "0004_imacmodel_alive_imacmodel_last_seen"),
     ]

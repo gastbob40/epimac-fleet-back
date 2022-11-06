@@ -1,5 +1,3 @@
-import threading
-
 import paramiko
 
 from daemon.models import IMacModel

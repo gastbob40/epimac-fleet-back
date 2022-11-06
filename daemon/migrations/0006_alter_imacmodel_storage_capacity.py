@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("daemon", "0005_remove_imacmodel_alive_imacmodel_cpu_cores_and_more"),
     ]
