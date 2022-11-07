@@ -11,7 +11,7 @@ class IMacModelAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ('Config', {
-            'fields': ('label', 'ip', 'mac_user')
+            'fields': ('label', 'ip', 'mac_user', 'report_status')
         }),
         ('Software properties', {
            'fields': ('macos_version', 'macos_build_version')

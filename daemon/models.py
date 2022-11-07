@@ -4,21 +4,22 @@ from django.db import models
 # Create your models here.
 
 class IMacModel(models.Model):
-    # Mac specification
+    # Config
     label = models.CharField(max_length=255)
     ip = models.CharField(max_length=255)
+    report_status = models.BooleanField(default=True)
 
-    macos_version = models.CharField(max_length=255)
-    macos_build_version = models.CharField(max_length=255)
-
+    # Hardware properties
     serial_number = models.CharField(max_length=255)
-
     storage_capacity = models.FloatField()
     memory = models.IntegerField()
     cpu_cores = models.IntegerField()
 
-    # Internal Data
+    # Software properties
+    macos_version = models.CharField(max_length=255)
+    macos_build_version = models.CharField(max_length=255)
 
+    # Daemon properties
     mac_user = models.CharField(max_length=255)
     last_seen = models.DateTimeField(null=True, blank=True)
 

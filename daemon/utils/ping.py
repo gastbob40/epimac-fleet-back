@@ -32,5 +32,5 @@ def ping_mac(imac: IMacModel):
 
     imac.save()
 
-    if current_status != imac.status:
+    if current_status != imac.status and imac.report_status:
         send_imac_status_notification(imac)
