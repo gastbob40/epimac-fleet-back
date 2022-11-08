@@ -9,6 +9,7 @@ def get_imacs(request):
 
     formatted_imacs = [{
         "id": imac.id,
+        "label": imac.label,
         "ip": imac.ip,
         "macos_version": imac.macos_version,
         "serial_number": imac.serial_number,
