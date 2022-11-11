@@ -17,6 +17,7 @@ def get_imacs(request):
         "memory": imac.memory,
         "cpu_cores": imac.cpu_cores,
         "status": imac.status,
+        "last_seen": imac.last_seen,
     } for imac in imacs]
 
     return JsonResponse({
