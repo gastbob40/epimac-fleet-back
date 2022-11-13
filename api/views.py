@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
 from daemon.models import IMacModel
+from daemon.utils.notification import send_register_request_notification
 
 
 def get_imacs(request):
@@ -79,3 +80,28 @@ def check_auth_login(request):
         "username": user.username,
         "is_superuser": user.is_superuser,
     })
+
+
+def post_register_request(request):
+    if request.method != "POST":
+        return JsonResponse({
+            "error": "Invalid request method"
+        }, status=405)
+
+    body = request.body.decode('utf-8')
+    body = json.loads(body)
+
+    email = body.get("email")
+    explication = body.get("explication")
+
+    if not email or not explication:
+        return JsonResponse({
+            "error": "Missing fields"
+        }, status=400)
+
+    send_register_request_notification(email, explication)
+
+    return JsonResponse({
+        "message": "Request sent"
+    })
+

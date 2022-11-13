@@ -25,6 +25,24 @@ def send_imac_status_notification(imac: IMacModel):
 
     webhook = DiscordWebhook(
         url=os.environ.get('DISCORD_MAC_STATUS_WEBHOOK_URL'),
+        rate_limit_retry=True,
+        username="EpiMac Bot",
+        avatar_url="https://cdn.discordapp.com/icons/501407992818958377/a_8d192eb9c2143f2914124345b28bbc1f.webp?size=1024", )
+
+    webhook.add_embed(embed)
+    webhook.execute()
+
+
+def send_register_request_notification(email, explication):
+    embed = DiscordEmbed(
+        title=f'Register request from {email}',
+        description=f'**Explication**:\n{explication}',
+        color='e96d76'
+    )
+
+    webhook = DiscordWebhook(
+        url=os.environ.get('DISCORD_REGISTER_REQUEST_WEBHOOK_URL'),
+        rate_limit_retry=True,
         username="EpiMac Bot",
         avatar_url="https://cdn.discordapp.com/icons/501407992818958377/a_8d192eb9c2143f2914124345b28bbc1f.webp?size=1024", )
 
