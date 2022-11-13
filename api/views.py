@@ -1,4 +1,7 @@
 # Create your views here.
+import json
+
+from django.contrib.auth import get_user_model
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 
@@ -46,4 +49,33 @@ def get_imac(request, mac_id):
         "mac_user": mac.mac_user,
         "status": mac.status,
         "last_seen": mac.last_seen,
+    })
+
+
+def check_auth_login(request):
+    if request.method != "POST":
+        return JsonResponse({
+            "error": "Invalid request method"
+        }, status=405)
+
+    body = request.body.decode('utf-8')
+    body = json.loads(body)
+
+    email = body.get("email")
+    password = body.get("password")
+
+    User = get_user_model()
+
+    user = User.objects.filter(email=email).first()
+
+    if not user or not user.check_password(password):
+        return JsonResponse({
+            "error": "User not found"
+        }, status=400)
+
+    return JsonResponse({
+        "id": user.id,
+        "email": user.email,
+        "username": user.username,
+        "is_superuser": user.is_superuser,
     })
