@@ -8,4 +8,5 @@ urlpatterns = [
     path("imacs/<int:mac_id>", views.get_imac),
     path("auth/login", csrf_exempt(views.check_auth_login)),
     path("auth/register", csrf_exempt(views.post_register_request)),
+    path("auth/exists", csrf_exempt(views.post_check_user_exists)),
 ]

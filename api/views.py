@@ -105,3 +105,34 @@ def post_register_request(request):
         "message": "Request sent"
     })
 
+
+def post_check_user_exists(request):
+    if request.method != "POST":
+        return JsonResponse({
+            "error": "Invalid request method"
+        }, status=405)
+
+    body = request.body.decode('utf-8')
+    body = json.loads(body)
+
+    email = body.get("email")
+
+    if not email:
+        return JsonResponse({
+            "error": "Missing fields"
+        }, status=400)
+
+    user = get_user_model().objects.filter(email=email).first()
+
+    if not user:
+        return JsonResponse({
+            "error": "User not found"
+        }, status=400)
+
+    return JsonResponse({
+        "id": user.id,
+        "email": user.email,
+        "username": user.username,
+        "is_superuser": user.is_superuser,
+    })
+
